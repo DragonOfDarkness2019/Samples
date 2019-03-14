@@ -7,7 +7,7 @@ using namespace std;
 
 // Going to be a simple, abstract, numeric-based representation of a checkerboard.
 // An 8x8 grid, where 0 represents an empty square, a 1 represents player 1, a 2 represents player 2,
-// and a -1 represents a squrare that can't be moved to.
+// and a -1 represents a square that can't be moved to.
 // Going to make it text input; graphics can always come later, once I have better tools.
 // I don't have a lot of time to be clever, so I'm going to have to brute force most of this.
 // Hence not using linked list, not using classes, putting everything in one file... not using anything remotely fancy.
