@@ -1,0 +1,97 @@
+
+
+Possibilities:
+
+--------
+
+Player needs to select a new checker if:
+
+The square doees not have the player's checker in it (could be empty, could be an opponent's piece, could be a non-usable square)
+	board[row][column]!=1
+
+The square has the player's checker in it, but it's at the top of the board and can't move.
+	row = 0
+
+The square has the player's checker in it, but it's locked in by the player's other checkers or the side of the board.
+	(board[row-1][column-1]=-1 or 1) and (board[row-1][column+1]=-1 or 1)
+
+	
+
+--------
+
+Player can jump if:
+
+The adjacent square has an opponent's checker in it and the square beyond that is clear.
+• Only check square beyond if there's an opponent's checker in closer square.
+• Check again when landing for the possibility of a double jump, check again after that for a triple jump.
+• Row value must be greater than 2.  Can't jump an opponent from rows 0 or 1.
+
+If board[row-1][column-1]==2 and row>2 then
+	if board[row-2][column-2]==0 then
+		can jump left.
+
+If board[row-1][column+1]==2 and row>2 then
+	if board[row-2][column+2]==0 then
+		can jump right.
+
+(If the player can jump neither left nor right - due to having the opponent's checker in an adjacent square but no free space beyond that)
+
+(It's two nested if statements instead of a single one to prevent column-2 or column+2 from being out of range)
+
+Jump left: 
+	board[row][column]=0 		// the player moves out of the space
+	board[row-1][column-1]=0 	// the opponent's piece is removed from the board
+	board[row-2][column-2]=1 	// the player lands in the new space
+	p2-- 				// the number of active pieces the opponent has is decremented
+
+Jump right: 
+	board[row][column]=0 		// same as above
+	board[row-1][column+1]=0
+	board[row-2][column+2]=1
+	p2--
+
+
+If p2 is 0 (or less, though it shouldn't be), then win is set to true;
+
+---------
+
+Last minute (literally) addendum - need to change "legal" variable from a boolean to an int, for different possible situations.  (e.g., legal = 0 means there's no legal piece selected yet, legal = 1 meas that the piece selected can move, legal = 2 means that the piece can jump, etc)
+
+... unfortunately, my four hours are up just as I'm writing this note to self.
+
+---------
+
+Otherwise, player can move up-left and/or up-right.  (To get here, the checks for "checker is valid" must have passed and the checks for "checker is blocked" and "Checker can jump" must already have failed.... and "checker" no longer looks like word)
+
+Choose left or right.  If the space is free, the player can select that space and move there. (Otherwise, choose again, or possibly just automatically move it the other way, because if they got this far, that's all they can do)
+
+	if board[row-1][column-1]==0 then
+	move left; (or, more accurately, the player CAN move left; they're not FORCED to)
+	if board[row-1][column+1]==0 then
+	move right;
+
+Move left: 
+	board[row][column]=0 		// the player moves out of the original space
+	board[row-1][column-1]=1 	// the player moves into the new space
+
+Move right: 
+	board[row][column]=0		// same as above
+	board[row-1][column+1]=1
+
+If row-1 is 0, then p1 is decremented (since that piece can no longer move, so it's considered removed by the simplified algorithm I'm using)
+
+(p1 should also be decremented if it's in row 1, and the spaces to its upper-left and right are both blocked with the player's own checkers.  Hm, recursion needed here?  Maybe it'd be simpler to remove the piece from the board if it reaches the other side?  Not in the original spec, though)
+
+-----
+-----
+
+AI thoughts
+
+
+Due to the "no kings" rule, getting to the opposite side should be the lowest possible priority for the computer.  Thus, it should always choose to move pieces that are furthest away from the opposite side as possible.
+
+First have the computer scan the board, from the top down (rows 0 to 5, in that order) for pieces that can jump. (Tests should be similar to the player's side)
+
+If no pieces can jump, then check for pieces that can move, again from the top down (rows 0 to 6, in that order)
+
+(I myself do not know enough about the deeper strategies of Checkers in order to code them, so it's going to be a pretty dumb opponent)
