@@ -1,6 +1,8 @@
-// This was written as a programming test, where I was given only a couple of hours to create a full checkers game. I ran out of time before it was completed.
+// This was written as a programming test, where I was given only a couple of hours to create a full checkers game.
+// I ran out of time before it was completed.
 
-// This program is not finished, and won't run.  Please see accompanying "Checker pseudocode and notes.txt" document for where I was heading when I ran out of time.
+// This program is not finished, and won't run.
+// Please see accompanying "Checker pseudocode and notes.txt" document for where I was heading when I ran out of time.
 
 #include <string>
 #include <iostream>
