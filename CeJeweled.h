@@ -1,5 +1,5 @@
 /*
- *  Jewel.h
+ *  CeJeweled.h
  *  Jeweler
  *
  *  Created by Larry Isen on Sun Mar 22 2009.
