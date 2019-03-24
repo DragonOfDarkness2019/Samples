@@ -85,7 +85,7 @@ If row-1 is 0, then p1 is decremented (since that piece can no longer move, so i
 -----
 -----
 
-AI thoughts
+AI thoughts:
 
 
 Due to the "no kings" rule, getting to the opposite side should be the lowest possible priority for the computer.  Thus, it should always choose to move pieces that are furthest away from the opposite side as possible.
