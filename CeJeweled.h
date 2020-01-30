@@ -7,6 +7,8 @@
  *
  */
 
+//Note to self: Create jewel graphics in VICE.
+
 // #include <Carbon/Carbon.h> // Uncomment if running in XCode on MacOS
 #include <cstdlib>
 #include <stdio.h>
